@@ -1,8 +1,14 @@
 {
-  "name": "wamoco/theme-blank",
+  "name": "wamoco/twig-theme-blank",
   "description": "Wamoco Twig Theme - Blank",
   "version": "1.0.0",
   "type": "magento2-theme",
+  "authors": [
+      {
+          "name": "Bernhard Leers",
+          "email": "bl@wamoco.de"
+      }
+  ],
   "license": [
     "proprietary"
   ],
