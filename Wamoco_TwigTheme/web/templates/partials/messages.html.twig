@@ -1,0 +1,17 @@
+{% for message in messages.messages %}
+  {% if message.type == 'error' %}
+    <div class="alert alert-danger" role="alert">
+      {{ message.text|raw }}
+    </div>
+  {% endif %}
+  {% if message.type == 'notice' %}
+    <div class="alert alert-warning" role="alert">
+      {{ message.text|raw }}
+    </div>
+  {% endif %}
+  {% if message.type == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{ message.text|raw }}
+    </div>
+  {% endif %}
+{% endfor %}

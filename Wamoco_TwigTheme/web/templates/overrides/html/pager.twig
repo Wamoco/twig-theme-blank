@@ -1,0 +1,30 @@
+{% if block.getCollection.getSize > 0 %}
+  {% if block.getLastPageNum()>1 %}
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination">
+            {% if not block.isFirstPage %}
+            <li class="page-item"><a class="page-link" href="{{ block.getPreviousPageUrl|raw }}"><i>{{ 'Back'|trans }}</i></a></li>
+            {% endif %}
+            {% if block.canShowFirst %}
+              <li class="page-item"><a class="page-link" href="{{ block.getFirstPageUrl|raw }}">1</a></li>
+            {% endif %}
+            {% if block.canShowPreviousJump %}
+              <li class="page-item"><a class="page-link" href="{{ block.getPreviousJumpUrl|raw }}">...</a></li>
+            {% endif %}
+            {% for page in block.getFramePages %}
+              <li class="page-item"><a class="page-link" href="{{ block.getPageUrl(page)|raw }}">{{ page }}</a></li>
+            {% endfor %}
+            {% if block.canShowNextJump %}
+              <li class="page-item"><a class="page-link" href="{{ block.getNextJumpUrl|raw }}">...</a></li>
+            {% endif %}
+            {% if block.canShowLast %}
+            <li class="page-item"><a class="page-link" href="{{ block.getLastPageUrl|raw }}">{{ block.getLastPageNum }}</a></li>
+            {% endif %}
+            {% if not block.isLastPage %}
+            <li class="page-item"><a class="page-link" href="{{ block.getNextPageUrl|raw }}"><i>{{ 'Next'|trans }}</i></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+  {% endif %}
+{% endif %}

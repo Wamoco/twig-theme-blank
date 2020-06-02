@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="authentication-popup" remove="true" />
+        <referenceBlock name="product.tooltip" remove="true" />
+
+        <referenceBlock name="catalog.leftnav">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">layer/view.twig</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="category.products.list">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">product/list.twig</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="product_list_toolbar">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">product/list/toolbar.twig</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="product_list_toolbar_pager">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">html/pager.twig</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="search.result">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">result.twig</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="search_result_list">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">product/list.twig</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

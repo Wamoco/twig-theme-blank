@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+          <form action="/customer/account/loginPost" method="POST">
+            <div class="row">
+              <p>{{'If you have an account, sign in with your email address.'|trans}}<p>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                  <label for="email">{{ 'Email'|trans }} <span>*</span></label>
+                  <input type="text" class="form-control" name="login[username]" id="email" value="">
+              </div>
+              <div class="col-12">
+                  <label for="password">{{ 'Password'|trans }} <span>*</span></label>
+                  <input type="password" class="form-control" name="login[password]" id="password" value="">
+              </div>
+              <div class="col-12">
+                <input type="submit" class="form-control btn essence-btn" value="{{'Sign in'|trans}}">
+                <a href="{{ getUrl('customer/account/forgotpassword') }}">{{'Forgot Your Password?'|trans}}</a>
+                <a href="{{ getUrl('customer/account/create') }}">{{'Create an Account'|trans}}</a>
+              </div>
+            </div>
+            <input type="hidden" name="form_key" value="{{ getFormKey }}">
+          </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

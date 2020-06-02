@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      {{ renderElement('content.top') }}
+      {{ renderElement('content') }}
+      {{ getBlock('cms_page').toHtml }}
+    </div>
+  </div>
+</div>
+{% endblock %}

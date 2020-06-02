@@ -1,0 +1,39 @@
+{% if orders.length > 0 %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>{{'Order #'|trans}}</th>
+        <th>{{'Date'|trans}}</th>
+        <th>{{'Ship To'|trans}}</th>
+        <th>{{'Order Total'|trans}}</th>
+        <th>{{'Status'|trans}}</th>
+        <th>{{'Action'|trans}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+        <tr>
+          <td>{{order.getRealOrderId}}</td>
+          <td>{{order.getCreatedAt|formatDate}}</td>
+          <td>
+            {{ order.getShippingAddress ? order.getShippingAddress.getName : '' }}
+          </td>
+          <td>{{ order.getGrandTotal|price }}</td>
+          <td>{{order.getStatusLabel}}</td>
+          <td>
+            <a href="{{getUrl('sales/order/view', {'order_id': order.Id})}}" class="action view">
+              <span>{{'View Order'|trans}}</span>
+            </a>
+            {% if order.canReorder %}
+            <a href="#" data-post='{{ getUrl('sales/order/reorder', {'order_id': order.Id}) }}' class="action order">
+                <span>{{'Reorder'|trans}}</span>
+                </a>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>{{ 'No ordered items'|trans }}</p>
+{% endif %}

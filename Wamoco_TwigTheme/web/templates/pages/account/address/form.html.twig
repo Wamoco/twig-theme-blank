@@ -1,0 +1,61 @@
+{% extends 'pages/account/base.html.twig' %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+      <form action="{{getBlock('customer_address_edit').getSaveUrl}}" method="POST">
+        <div class="row">
+          <div class="col-12">
+              <label>{{ 'First Name'|trans }} <span>*</span></label>
+              <input type="text" class="form-control" name="firstname" value="{{getBlock('customer_address_edit').getAddress.firstname}}">
+          </div>
+          <div class="col-12">
+              <label>{{ 'Last Name'|trans }} <span>*</span></label>
+              <input type="text" class="form-control" name="lastname" value="{{getBlock('customer_address_edit').getAddress.lastname}}">
+          </div>
+          <div class="col-12">
+              <label>{{ 'Company'|trans }} </label>
+              <input type="text" class="form-control" name="company" value="{{getBlock('customer_address_edit').getAddress.company}}">
+          </div>
+          <div class="col-12">
+              <label>{{ 'Phone Number'|trans }} <span>*</span></label>
+              <input type="text" class="form-control" name="telephone" value="{{getBlock('customer_address_edit').getAddress.telephone}}">
+          </div>
+          <div class="col-12">
+              <label>{{ 'Street Address Number'|trans }} <span>*</span></label>
+              <input type="text" class="form-control" name="street[0]" value="{{getBlock('customer_address_edit').getAddress.street[0]}}">
+              <input type="text" class="form-control" name="street[1]" value="{{getBlock('customer_address_edit').getAddress.street[1]}}">
+          </div>
+          <div class="col-12">
+              <label>{{ 'City'|trans }} <span>*</span></label>
+              <input type="text" class="form-control" name="city" value="{{getBlock('customer_address_edit').getAddress.city}}">
+          </div>
+          <div class="col-12">
+              <label>{{ 'Postcode'|trans }} <span>*</span></label>
+              <input type="text" class="form-control" name="postcode" value="{{getBlock('customer_address_edit').getAddress.postcode}}">
+          </div>
+          <div class="col-12">
+              <select name="country_id" class="form-control">
+                {% for country in getHelper('Magento\\Directory\\Model\\ResourceModel\\Country\\Collection').loadByStore.toOptionArray %}
+                  <option value="{{country.value}}" {% if getBlock('customer_address_edit').getAddress.countryId==country.value %} selected {%endif%}>{{country.label}}</option>
+                {% endfor %}
+              </select>
+          </div>
+
+          <div class="col-12">
+              <label>{{ 'Use as my default billing address'|trans }} </label>
+              <input type="checkbox" name="default_billing" value="1" class="checkbox">
+          </div>
+          <div class="col-12">
+              <label>{{ 'Use as my default shipping address'|trans }} </label>
+              <input type="checkbox" name="default_shipping" value="1" class="checkbox">
+          </div>
+
+          <div class="col-12">
+            <input type="submit" class="form-control btn essence-btn" value="{{'Save'|trans}}">
+          </div>
+        </div>
+        <input type="hidden" name="form_key" value="{{ getFormKey }}">
+      </form>
+    </div>
+</div>
+{% endblock %}

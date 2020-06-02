@@ -1,0 +1,5 @@
+{% extends 'pages/account/base.html.twig' %}
+{% block content %}
+  {{ include('pages/account/order/table.html.twig', { orders: getBlock('sales.order.history').getOrders }) }}
+{% endblock %}
+

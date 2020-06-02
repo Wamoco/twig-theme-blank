@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% if getBlock('category.products').getCurrentCategory.displayMode == "PAGE" %}
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      {{ renderElement('sidebar.main') }}
+      {{ renderElement('content.aside') }}
+    </div>
+    <div class="col-9">
+      {{ renderElement('content.top') }}
+      {{ renderElement('content') }}
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      {{ renderElement('sidebar.main') }}
+      {{ renderElement('content.aside') }}
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-12">
+          <p><span>{{ toolbar.getTotalNum }}</span> {{'Products'|trans}}</p>
+        </div>
+        <div class="col-12">
+          <div class="product-sorting d-flex" data-mage-init='{{ getBlock("product_list_toolbar").widgetOptionsJson|raw }}'>
+            <p>{{'Sort By'|trans}}</p>
+              <form action="{{ currentUrl }}" method="get">
+                  <select name="product_list_order" id="sortByselect" data-role="sorter">
+                      {% for key, value in getBlock("product_list_toolbar").getAvailableOrders %}
+                      <option value="{{ key }}" {% if key == getBlock("product_list_toolbar").getCurrentOrder %}selected{% endif %}>{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                  <input type="submit" class="d-none" value="Filter">
+              </form>
+          </div>
+        </div>
+        <div class="col-12">
+          <p><span>{{ toolbar.getTotalNum }}</span> {{'Products'|trans}}</p>
+        </div>
+        <div class="col-12">
+          {{ renderBlock('category.products.list') }}
+        </div>
+        <div class="col-12">
+          {{ renderBlock('product_list_toolbar') }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,9 @@
+<p>
+  {% if customer.fullname %}
+    <a href="{{ getUrl('customer/account/index') }}">{{ customer.fullname }}</a> (<a href="{{ getUrl('customer/account/logout') }}">{{ 'Logout'|trans }}</a>)
+    <a href="{{ getUrl('/wishlist') }}">{{'Wishlist'|trans}}({{ wishlist.counter }})</a>
+  {% else %}
+    <a href="{{ getUrl('customer/account/login') }}">{{ 'Login'|trans }}</a>
+  {% endif %}
+  <a href="{{ getUrl('checkout/cart') }}">{{'Shopping Cart'|trans}}({{ cart.summary_count }})</a>
+</p>

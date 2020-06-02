@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ getHeadData().title }}</title>
+    <meta charset="UTF-8">
+    <script>
+        var require = {
+          "baseUrl": "{{ getViewFileUrl() }}"
+        };
+        window.BASE_URL = "{{ getBaseUrl() }}";
+        window.WEB_URL = "{{ getViewFileUrl('Wamoco_TwigTheme') }}";
+        window.TEMPLATES_URL = "{{ getViewFileUrl('Wamoco_TwigTheme/templates') }}";
+        window.priceFormat = {{ getHelper('Magento\\Framework\\Locale\\Format').getPriceFormat|json_encode|raw }};
+    </script>
+    <script type="text/javascript" src="{{getJs('requirejs/require.js')}}"></script>
+    <script type="text/javascript" src="{{getJs('requirejs-config.js')}}"></script>
+    <link rel="stylesheet" href="{{ getAsset('/css/simple-grid.css') }}" async defer>
+    <link rel="stylesheet" href="{{ getAsset('/css/style.css') }}" async defer>
+    <link rel="stylesheet" href="{{ getAsset('/css/luma.css') }}" async defer>
+</head>
+
+<body>
+    {{ include('partials/header.html.twig') }}
+
+    <div data-mage-init='{"TwigTemplate": {"path":"partials/messages.html.twig"} }'></div>
+
+    {% if blockExists('page.main.title') %}
+      {{ include('partials/page-title.html.twig', {pageTitle: getBlock('page.main.title').getPageHeading }) }}
+    {% endif %}
+
+    {% block body %}{% endblock %}
+
+    {% include('partials/footer.html.twig') %}
+
+    {{ renderBlock('customer.section.config') }}
+    {{ renderBlock('customer.customer.data') }}
+    {{ renderBlock('pageCache') }}
+
+    <script type="text/x-magento-init">
+      {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {}
+            }
+      }
+    </script>
+</html>

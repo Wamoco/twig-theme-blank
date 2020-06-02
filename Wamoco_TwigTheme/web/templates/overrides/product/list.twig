@@ -1,0 +1,5 @@
+{% for product in block.getLoadedProductCollection %}
+  <div class="col-4">
+    {{ include('partials/product-tile.html.twig', {product: product}) }}
+  </div>
+{% endfor %}

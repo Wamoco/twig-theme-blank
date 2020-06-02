@@ -1,0 +1,17 @@
+<div class="container footer">
+  <div class="row">
+    <div class="col-12">
+      <ul>
+        {% for link in getBlock('footer_links').getLinks %}
+          <li><a href="{{ link.getHref }}">{{ link.getLabel }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 center">
+      <p>{{ getBlock('absolute_footer').getCopyright }}</p>
+    </div>
+  </div>
+</div>
+

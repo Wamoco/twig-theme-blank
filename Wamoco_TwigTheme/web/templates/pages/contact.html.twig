@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form class="form contact"
+                  action="{{getUrl('contact/index/post')}}"
+                  id="contact-form"
+                  method="post"
+                  data-hasrequired="{{'* Required Fields'|trans}}"
+                  data-mage-init='{"validation":{}}'>
+                <fieldset class="fieldset">
+                  <legend class="legend"><span>{{ 'Write Us'|trans }}</span></legend><br />
+                  <div class="field note no-label">{{ 'Jot us a note and we’ll get back to you as quickly as possible.'|trans }}</div>
+                    <div class="field name required">
+                      <label class="label" for="name"><span>{{'Name'|trans}}</span></label>
+                      <input name="name" id="name" title="{{'Name'|trans}}" value="{{getHelper('Wamoco\\TwigTheme\\Helper\\Contact').getName}}" class="input-text form-control" type="text" data-validate="{required:true}"/>
+                    </div>
+                    <div class="field email required">
+                      <label class="label" for="email"><span>{{'Email'|trans}}</span></label>
+                      <input name="email" id="email" title="{{'Email'|trans}}" value="{{getHelper('Wamoco\\TwigTheme\\Helper\\Contact').getEmail}}" class="input-text form-control" type="email" data-validate="{required:true, 'validate-email':true}"/>
+                    </div>
+                    <div class="field telephone">
+                      <label class="label" for="telephone"><span>{{'Phone Number'|trans}}</span></label>
+                      <input name="telephone" id="telephone" title="{{ 'Phone Number'|trans}}" value="{{getHelper('Wamoco\\TwigTheme\\Helper\\Contact').getTelephone}}" class="input-text form-control" type="text" />
+                    </div>
+                    <div class="field comment required">
+                      <label class="label" for="comment"><span>{{'What’s on your mind?'|trans}}</span></label>
+                      <textarea name="comment" id="comment" title="{{'What’s on your mind?'|trans}}" class="input-text form-control" cols="5" rows="3" data-validate="{required:true}">{{formdata.comment}}</textarea>
+                    </div>
+                    {{ form.additional_info }}
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <input type="hidden" name="hideit" id="hideit" value="" />
+                        <input type="hidden" name="form_key" value="{{ getFormKey }}">
+                        <button type="submit" title="{{'Submit'|trans}}" class="btn essence-btn form-control">
+                          <span>{{'Submit'|trans}}</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

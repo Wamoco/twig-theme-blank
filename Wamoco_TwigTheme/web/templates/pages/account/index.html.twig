@@ -1,0 +1,36 @@
+{% extends 'pages/account/base.html.twig' %}
+{% block content %}
+<div class="card">
+  <h2>{{'Account Information'|trans}}</h2>
+  <div class="card-body">
+    <p>{{ getCustomer().firstname }} {{ getCustomer().lastname }}</p>
+    <p>{{ getCustomer().email }}</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>{{'Address Book'|trans}}</h2>
+  <div class="card-body">
+    <h3>{{'Default Billing Address'|trans}}</h3>
+    {% if getCustomer().defaultBilling %}
+      {{ include('partials/address.html.twig', {address: getCustomer().addresses[getCustomer().defaultBilling]}) }}
+    {% else %}
+      <p>{{'None'|trans}}</p>
+    {% endif %}
+    <h3>{{'Default Shipping Address'|trans}}</h3>
+    {% if getCustomer().defaultShipping %}
+      {{ include('partials/address.html.twig', {address: getCustomer().addresses[getCustomer().defaultShipping]}) }}
+    {% else %}
+      <p>{{'None'|trans}}</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <h2>{{'Recent Orders'|trans}}</h2>
+  <div class="card-body">
+    {{ include('pages/account/order/table.html.twig', { orders: getBlock('customer_account_dashboard_top').getOrders }) }}
+  </div>
+</div>
+
+{% endblock %}

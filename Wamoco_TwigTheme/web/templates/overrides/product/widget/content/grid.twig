@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ block.getTitle }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% for product in block.getProductCollection %}
+            <div class="col-3">
+              {{ include('partials/product-tile.html.twig', {product: product}) }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- ##### New Arrivals Area End ##### -->
+
+

@@ -1,0 +1,67 @@
+{% extends 'pages/account/base.html.twig' %}
+{% block content %}
+<h1>{{'Order'|trans}} {{order.getRealOrderId}}</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>{{'Item in Cart'|trans}}</th>
+      <th>{{'Price'|trans}}</th>
+      <th>{{'Qty'|trans}}</th>
+      <th>{{'Subtotal'|trans}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in order.items %}
+    <tr>
+      <td>{{item.name}}</td>
+      <td>{{item.price|price}}</td>
+      <td>{{item.qtyOrdered|qty}}</td>
+      <td>{{item.rowTotal|price}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br>
+<table class="table">
+  <tbody>
+    {% for total in totals %}
+    <tr>
+      <td>{{total.label}}</td>
+      <td>{{total.value|price}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h2>{{'Order Information'}}</h2>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <td>{{'Shipping Address'|trans}}</td>
+      <td>
+        <p>{{order.shippingAddress.firstname}} {{order.shippingAddress.lastname}}<br>
+        {{order.shippingAddress.street}}<br>
+        {{order.shippingAddress.postcode}} {{order.shippingAddress.city}}
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>{{'Shipping Method'|trans}}</td>
+      <td>{{order.shipping_description}}</td>
+    </tr>
+    <tr>
+      <td>{{'Billing Address'|trans}}</td>
+      <td>
+        <p>{{order.billingAddress.firstname}} {{order.billingAddress.lastname}}<br>
+        {{order.billingAddress.street}}<br>
+        {{order.billingAddress.postcode}} {{order.billingAddress.city}}
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>{{'Payment Method'|trans}}</td>
+      <td>{{order.payment.methodInstance.title}}</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

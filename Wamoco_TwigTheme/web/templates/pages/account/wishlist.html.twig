@@ -1,0 +1,18 @@
+{% extends 'pages/account/base.html.twig' %}
+{% block content %}
+  <div class="row">
+    {% if getBlock('customer.wishlist').getWishlistItems|length == 0 %}
+      <p>{{ 'You have no items in your wish list.'|trans }}</p>
+    {% endif %}
+
+    <form>
+      {% for item in getBlock('customer.wishlist').getWishlistItems %}
+        <div class="col-4">
+          {{ include('partials/product-tile.html.twig', {product: item.getProduct}) }}
+          <a href="#" data-post='{{ getHelper('\\Magento\\Wishlist\\Helper\\Data').getRemoveParams(item) }}'>{{ 'Remove Item'|trans }}</a>
+        </div>
+      {% endfor %}
+      <input type="hidden" name="form_key" value="{{ getFormKey }}">
+    </form>
+  </div>
+{% endblock %}

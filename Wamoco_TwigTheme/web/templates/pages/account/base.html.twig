@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+          <h5>Menu</h5>
+          <ul>
+            <li><a href="{{ getUrl('customer/account') }}">{{'My Account'|trans}}</a></li>
+            <li><a href="{{ getUrl('sales/order/history') }}">{{'My Orders'|trans}}</a></li>
+            <li><a href="{{ getUrl('wishlist/index/index') }}">{{'Wishlist'|trans}}</a></li>
+            <li><a href="{{ getUrl('customer/address') }}">{{'Address Book'|trans}}</a></li>
+            <li><a href="{{ getUrl('customer/account/logout') }}">{{'Sign Out'|trans}}</a></li>
+          </ul>
+        </div>
+        <div class="col-9">
+          {% block content %}
+          {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

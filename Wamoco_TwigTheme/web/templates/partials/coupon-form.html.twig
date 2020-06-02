@@ -1,0 +1,28 @@
+<form id="discount-coupon-form" action="/checkout/cart/couponPost/" method="post">
+  <div class="container">
+    <input type="hidden" name="remove" id="remove-coupon" value="{% if cart.coupon_code %}1{%endif%}">
+    <div class="row">
+      <div class="col-2">
+        <label for="coupon_code" class="label"><span>{{'Enter discount code'|trans}}</span></label>
+      </div>
+      <div class="col-10">
+        <input type="text" class="input-text form-control" id="coupon_code" name="coupon_code" value="{{cart.coupon_code}}" placeholder="Enter discount code">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        {% if cart.coupon_code %}
+        <button class="action apply primary form-control btn essence-btn" type="submit" value="{{'Cancel Coupon'|trans}}">
+            <span>{{'Cancel Coupon'|trans}}</span>
+          </button>
+        {% else %}
+      </div>
+      <div class="col-6">
+        <button class="action apply primary form-control btn essence-btn" type="submit" value="{{'Apply Discount'|trans}}">
+          <span>{{'Apply Discount'|trans}}</span>
+        </button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</form>

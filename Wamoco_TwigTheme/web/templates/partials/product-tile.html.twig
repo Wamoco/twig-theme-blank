@@ -1,0 +1,35 @@
+<div>
+    <a href="{{ product.getProductUrl }}">
+      <img src="{{getProductImage(product, 200, 200)}}" alt="" style="max-width:255px">
+    </a>
+    <div>
+        <a href="{{ product.getProductUrl }}">
+            <h6>{{ product.name }}</h6>
+        </a>
+        <p>
+          {% if product.specialPrice %}
+            <span class="old-price">{{ product.price|price|raw }}</span>
+            <p>{{ product.specialPrice|price|raw }}</p>
+          {% else %}
+            <p>{{ product.price|price|raw }}</p>
+          {% endif %}
+        </p>
+        <ul>
+          <li><a href="#" data-mage-init='{"Wamoco_TwigTheme/js/action/cart/add": {"productId": {{product.id}} } }' class="btn essence-btn">{{'Add to Cart'|trans}}</a></li>
+          <li><a href="#" class="wishlist" data-mage-init='{"Wamoco_TwigTheme/js/action/wishlist/toggle": {"productId": {{product.id}} } }'>{{'Add to Wishlist'|trans}}</a></li>
+        </ul>
+
+        <form data-role="tocart-form" data-product-sku="{{ product.sku|escapeHtmlAttr }}" action="{{ getHelper('Magento\\Checkout\\Helper\\Cart').getAddUrl(product) }}" method="post">
+            <input type="hidden" name="product" value="{{ product.id }}">
+            {{ renderBlock('formkey') }}
+            <button type="submit"
+                    title="{{ 'Add to Cart'|trans }}"
+                    class="action tocart primary">
+                <span>{{ 'Add to Cart'|trans }}</span>
+            </button>
+        </form>
+
+    </div>
+</div>
+
+

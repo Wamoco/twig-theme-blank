@@ -1,0 +1,28 @@
+{% extends 'pages/account/base.html.twig' %}
+{% block content %}
+  <h3>{{'Default Billing Address'|trans}}</h3>
+  {% if getCustomer().defaultBilling %}
+    {{ include('partials/address.html.twig', {address: getCustomer().addresses[getCustomer().defaultBilling]}) }}
+  {% else %}
+    <p>{{'None'|trans}}</p>
+  {% endif %}
+
+  <h3>{{'Default Shipping Address'|trans}}</h3>
+  {% if getCustomer().defaultShipping %}
+    {{ include('partials/address.html.twig', {address: getCustomer().addresses[getCustomer().defaultShipping]}) }}
+  {% else %}
+    <p>{{'None'|trans}}</p>
+  {% endif %}
+
+  <h3>{{'Addresses'|trans}}</h3>
+  {% for address in getCustomer().addresses %}
+    <div class="row">
+      <div class="col-12">
+        {{ include('partials/address.html.twig', {address: address}) }}
+        <a class="btn essence-btn" href="{{ getUrl('customer/address/edit', {'id': address.entity_id}) }}">{{'Edit'|trans}}</a>
+        <a class="btn essence-btn" href="#" data-post='{"action": "{{ getUrl('customer/address/delete') }}?id={{address.entity_id}}", "data": {}}'>{{'Delete'|trans}}</a>
+      </div>
+    </div>
+  {% endfor %}
+  <a class="btn essence-btn" href="{{ getUrl('customer/address/new') }}">{{'Add New Address'|trans}}</a>
+{% endblock %}

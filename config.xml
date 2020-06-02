@@ -1,0 +1,29 @@
+<theme>
+    <controllers>
+        <item name="Magento\CatalogSearch\Controller\Result\Index">pages/catalog/search.html.twig</item>
+        <item name="Magento\Catalog\Controller\Category\View">pages/catalog/category.html.twig</item>
+        <item name="Magento\Catalog\Controller\Product\View">pages/catalog/product.html.twig</item>
+        <item name="Magento\Checkout\Controller\Cart\Index">pages/checkout/cart.html.twig</item>
+        <item name="Magento\Checkout\Controller\Onepage\Success">pages/checkout/success.html.twig</item>
+        <item name="Magento\Cms\Controller\Index\Index">pages/cms/view.html.twig</item>
+        <item name="Magento\Cms\Controller\Noroute\Index">pages/cms/view.html.twig</item>
+        <item name="Magento\Cms\Controller\Page\View">pages/cms/view.html.twig</item>
+        <item name="Magento\Contact\Controller\Index\Index">pages/contact.html.twig</item>
+        <item name="Magento\Customer\Controller\Account\Create">pages/account/create.html.twig</item>
+        <item name="Magento\Customer\Controller\Account\CreatePassword">pages/account/createpassword.html.twig</item>
+        <item name="Magento\Customer\Controller\Account\ForgotPassword">pages/account/forgotpassword.html.twig</item>
+        <item name="Magento\Customer\Controller\Account\Index">pages/account/index.html.twig</item>
+        <item name="Magento\Customer\Controller\Account\Login">pages/account/login.html.twig</item>
+        <item name="Magento\Customer\Controller\Account\LogoutSuccess">pages/account/login.html.twig</item>
+        <item name="Magento\Customer\Controller\Address\Form">pages/account/address/form.html.twig</item>
+        <item name="Magento\Customer\Controller\Address\Index">pages/account/addressbook.html.twig</item>
+        <item name="Magento\Sales\Controller\Order\History">pages/account/orders.html.twig</item>
+        <item name="Magento\Sales\Controller\Order\View">pages/account/order/view.html.twig</item>
+        <item name="Magento\Wishlist\Controller\Index\Index">pages/account/wishlist.html.twig</item>
+    </controllers>
+    <routes>
+    </routes>
+    <rewrites>
+    </rewrites>
+</theme>
+

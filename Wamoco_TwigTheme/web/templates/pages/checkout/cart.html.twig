@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% if getCart().items|length > 0 %}
+<div class="container">
+    <div class="row">
+        <div class="col-9">
+          <form method="POST" action="/checkout/cart/updatePost/">
+            <input type="hidden" name="form_key" value="{{ getFormKey }}">
+              <table class="table">
+                <thead>
+                    <tr>
+                      <th colspan="2">{{'Item in Cart'|trans}}</th>
+                      <th>{{'Price'|trans}}</th>
+                      <th>{{'Qty'|trans}}</th>
+                      <th>{{'Subtotal'|trans}}</th>
+                      <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in getCart().items %}
+                  <tr>
+                    <td>
+                      <a href="{{ item.url }}">
+                        <img class="img-fluid" style="max-width: 100px;" src="{{ item.image_url }}" alt="{{ item.product.name }}">
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{ item.url }}">
+                        {{ item.name }}
+                      </a>
+                      {% for attribute in item.options.attributes_info %}
+                        <p class="size">{{attribute.label}}: {{attribute.value}}</p>
+                      {% endfor %}
+
+                    </td>
+                    <td>{{ item.price|price|raw }}</td>
+                    <td><input type="number" name="cart[{{ item.item_id }}][qty]" value="{{ item.qty }}"></td>
+                    <td>{{ item.row_total|price|raw }}</td>
+                    <td>
+                      <a href="#" data-post="{{getHelper('Wamoco\\TwigTheme\\Helper\\Cart').getDeletePostJson(item)}}" title="Remove item" class="action action-delete" >
+                        Remove item
+                      </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <input type="submit" class="btn btn-default" value="{{'Update'|trans}}">
+          </form>
+        </div>
+        <div class="col-3">
+          <div class="card">
+            <h2>{{'Summary'|trans}}</h2>
+            <div class="card-body">
+              {% for total in getCart().totals %}
+                <p>{{total.title}}: {{total.value|price}}</p>
+              {% endfor %}
+              <a class="btn btn-primary" href="{{ getUrl('checkout/index/index') }}">{{"Proceed to Checkout"|trans}}</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+          {% include("partials/coupon-form.html.twig") %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+          <p>{{'You have no items in your shopping cart.'|trans}}</p>
+        </div>
+    </div>
+ </div>
+{% endif %}
+
+{% endblock %}

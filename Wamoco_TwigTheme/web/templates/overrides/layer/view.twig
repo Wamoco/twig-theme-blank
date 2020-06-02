@@ -1,0 +1,40 @@
+{% if block.getChildBlock('state').getActiveFilters|length > 0 %}
+  <div class="widget brands {%if filter.getData('swatchData')%}color{%endif%} mb-50">
+      <!-- Widget Title 2 -->
+      <p class="widget-title2 mb-30">{{'Now Shopping by'|trans}}</p>
+      <div class="widget-desc">
+        {% for activeFilter in block.getChildBlock('state').getActiveFilters %}
+          <p>{{ activeFilter.filter.name }}: {{ activeFilter.label}} <a href="{{activeFilter.getRemoveUrl}}">[{{'Remove'|trans}}]</a></p>
+        {% endfor %}
+      </div>
+  </div>
+{% endif %}
+
+{% for filter in block.getFilters %}
+  {% if filter.itemsCount > 0 %}
+    <div class="widget brands mb-50">
+        <!-- Widget Title 2 -->
+        <p class="widget-title2 mb-30">{{filter.name}}</p>
+        <div class="widget-desc">
+            {% if filter.getData('swatchData') %}
+              <ul class="d-flex">
+                {% for optionId, swatch in filter.getData('swatchData')['swatches'] %}
+                    {% if swatch.type == 0 %}
+                      <li><a href="#">{{swatch.value}}</a></li>
+                    {% endif %}
+                    {% if swatch.type == 1 %}
+                      <li><a href="#" style="background-color:{{swatch.value}}"></a></li>
+                    {% endif %}
+                {% endfor %}
+              </ul>
+            {% else %}
+              <ul>
+                  {% for filterItem in filter.items %}
+                    <li><a href="{{ filterItem.url }}">{{filterItem.label|raw}}({{filterItem.count}})</a></li>
+                  {% endfor %}
+              </ul>
+            {% endif %}
+        </div>
+    </div>
+  {% endif %}
+{% endfor %}

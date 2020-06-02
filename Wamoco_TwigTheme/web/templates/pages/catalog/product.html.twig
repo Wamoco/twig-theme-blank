@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+        {% for image in getBlock('product.info.media.image').getGalleryImages %}
+          <img src="{{ getProductImage(image.getFile) }}" style="max-width:100px;">
+        {% endfor %}
+    </div>
+
+    <div class="col-9">
+        <h2>{{ getProduct().name }}<small> {{ getProduct().sku}}</small></h2>
+        <p class="product-price price-box" data-role="priceBox" data-product-id="{{ getProduct().entity_id }}">
+          {% if getProduct().specialPrice %}
+            <span class="old-price">{{ getProduct().price|price|raw }}</span>
+            <strong data-price-type="finalPrice">{{ getProduct().specialPrice|price|raw }}</strong>
+          {% else %}
+            <strong data-price-type="finalPrice">{{ getProduct().price|price|raw }}</strong>
+          {% endif %}
+        </p>
+        <script type="text/javascript">
+            require([
+                'jquery',
+                'priceBox'
+            ], function($){
+                var dataPriceBoxSelector = '[data-role=priceBox]',
+                dataProductIdSelector = '[data-product-id={{getBlock('product.info').getProduct.entity_id}}]',
+                    priceBoxes = $(dataPriceBoxSelector + dataProductIdSelector);
+
+                priceBoxes = priceBoxes.filter(function(index, elem){
+                    return !$(elem).find('.price-from').length;
+                });
+
+              priceBoxes.priceBox({'priceConfig': {{ getBlock('product.info').getJsonConfig|raw}}, 'priceTemplate': '<%- data.formatted %>'});
+            });
+        </script>
+
+        <p class="product-desc">{{ getProduct().description|raw }}</p>
+
+        <form id="product_addtocart_form" method="POST" action="{{ getHelper('Magento\\Checkout\\Helper\\Cart').getAddUrl(getProduct()) }}">
+            <input type="hidden" name="product" value="{{product.entity_id}}" />
+            <input type="hidden" name="selected_configurable_option" value="" />
+            <input type="hidden" name="item"  value="{{product.entity_id}}" />
+            <input name="form_key" type="hidden" value="{{ getFormKey }}" />
+            {% if getProduct().getTypeId == 'configurable' %}
+              <div class="d-flex mt-50 mb-30">
+                  {% for attribute in getBlock('product.info.configurable').getAllowAttributes %}
+                    <label>{{attribute.label}}</label>
+                    <select name="super_attribute[{{attribute.getAttributeId}}]"
+                      data-selector="super_attribute[{{attribute.getAttributeId}}]"
+                      data-validate="{required:true}"
+                      id="attribute{{attribute.getAttributeId}}"
+                      class="mr-5 super-attribute-select">
+                      <option value="">{{'Choose an Option...'|trans}}</option>
+                    </select>
+                  {% endfor %}
+              </div>
+              <script type="text/x-magento-init">
+                  {
+                      "#product_addtocart_form": {
+                          "configurable": {
+                              "spConfig": {{ getBlock('product.info.configurable').getJsonConfig|raw }},
+                              "gallerySwitchStrategy": "replace"
+                          }
+                      },
+                      "*" : {
+                          "Magento_ConfigurableProduct/js/catalog-add-to-cart": {}
+                      }
+                  }
+              </script>
+            {% endif %}
+
+            <div class="">
+                <input name="qty" type="number" value="1" />
+                <button type="submit" name="addtocart" class="btn essence-btn">{{'Add to Cart'|trans}}</button>
+                <a href="#" class="wishlist" data-mage-init='{"Wamoco_TwigTheme/js/action/wishlist/toggle": {"productId": {{ getProduct().entity_id }} } }'>{{ 'Add to Wishlist'|trans }}</a>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

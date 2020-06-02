@@ -1,0 +1,35 @@
+.menu ul {
+  display:inline;
+}
+.menu li {
+  display:inline;
+}
+.footer li {
+  display:inline;
+}
+.footer ul {
+  display:inline;
+}
+
+a.wishlist.active {
+  font-weight: bold;
+}
+
+.alert {
+  text-align: center;
+}
+
+.alert-danger {
+  background-color:red;
+}
+
+.alert-warning {
+  background-color:yellow;
+}
+
+.alert-success {
+  background-color: #00EE00;
+}
+.old-price {
+  text-decoration: line-through;
+}

@@ -1,0 +1,11 @@
+{% for item in menu|slice(1,3) %}
+  <ul>
+    <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+      {% if item.getChildren.count > 0 %}
+        {% for subitem in item.getChildren %}
+          <li><a href="{{ subitem.url }}">{{ subitem.name }}</a></li>
+        {% endfor %}
+      {% endif %}
+  </ul>
+{% endfor %}
+
